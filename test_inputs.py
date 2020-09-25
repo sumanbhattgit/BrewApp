@@ -44,17 +44,20 @@ class Test_Select_Option_From_Menu(unittest.TestCase):
         #ACT
         actual = 
 
+        self.assertFalse(actual)
+        self.assertEqual(actual, None)
 
-def print_menu(title, data):
-    items = []
-    for counter, item in enumerate(data, 1): #list number for preference 5
-        items.append(f"[{counter}] {item}")
-    clear_screen()
-    print(f"{title}\n")
-    print('\n'.join(items), '\n')
+
+# def print_menu(title, data):
+#     items = []
+#     for counter, item in enumerate(data, 1): #list number for preference 5
+#         items.append(f"[{counter}] {item}")
+#     clear_screen()
+#     print(f"{title}\n")
+#     print('\n'.join(items), '\n')
 
 #ARRANGE
-title = 
+# title = 
 #ACT
 #ASSERT
 
@@ -62,4 +65,4 @@ title =
 if __name__ == "__main__":
     unittest.main()
 
-   
+   just wanna check
