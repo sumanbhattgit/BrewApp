@@ -1,6 +1,7 @@
 # CHANGES MADE ON 02.0CT
 import os
 import csv
+import pyinputplus as pyip
 import src.core.db2peoplelist as a
 import src.core.db2drinklist as b
 import src.core.db2preference as c
@@ -200,7 +201,7 @@ def print_all_drinks():
     print_table('DRINKS', drinks)
     wait()
 
-def input_people_to_the_list():#############################OPTION 3
+def input_people_to_the_list():
     input_name = user_input("Enter your first name: \n")
     if input_name == "":
         print("No name entered")
@@ -218,47 +219,32 @@ def input_people_to_the_list():#############################OPTION 3
     else:
         print("I don't understand")
         return
-    
     input_name_title = input_name.title()
     input_last_name_title = input_last_name.title()
-    print(f"{input_name_title}{input_last_name_title} has been added to the database.") 
-    a.uploading_people_to_the_database(input_name_title, input_last_name_title, input_age)
-    wait()
-    
 
-def input_drinks_to_the_list(): #############################OPTION 4
+    a.uploading_people_to_the_database(input_name_title, input_last_name_title, input_age)
+    print(f"{input_name_title}{input_last_name_title} has been added to the list.")
+
+    #     if input_name_title not in people:
+    #         people.append(input_name_title)
+    #         print(f"{input_name_title +} has been added to the list.")
+    #         print_table("PEOPLE", people)
+    #         save_data(PEOPLE_FILE_PATH, people)      
+    #         wait()
+
+def input_drinks_to_the_list():
     input_drink = user_input("Enter a drink: \n")
-    input_drink_title = input_drink.title()
     if input_drink == "":
         print("No name entered")
         wait()
-
-    input_category = user_input("Enter a category: Coffee or Cocktails or Wine or Soft Drinks \n")
-    input_category_title = input_category.title()
-    if input_category == "":
-        print("No name entered")
-        wait()
-    
-    input_age_limit = user_input("Does it have alcohol: Yes or No \n")
-    if input_age_limit == "":
-        print("Enter Yes or No")
-        wait()
-        if input_age_limit.lower() in {"y","yes"}:
-            age_limit_a = int(0)
-        if input_age_limit.lower() in {"n","no"}:
-            age_limit_a = int(1)    
-
-    input_price = user_input("Enter price for the drink: \n")
-    if input_price == "":
-        print("No name entered")
-        wait()
-    if input_price.replace(".", "", 2).isdigit():
-        input_price_float = float(input_price)
-        
-       
-    print(f"{input_drink_title} has been added to the database.") 
-    b.uploading_drink_to_the_database(input_drink_title, input_category_title, age_limit_a, input_price_float)    
-    wait()
+    else:
+        input_drink_title = input_drink.title()
+        if input_drink not in drinks:
+            drinks.append(input_drink_title)
+            print(f"{input_drink_title} has been added.")
+            print_table("DRINKS", drinks)
+            COUNT_DOWN = 3  
+            wait()
 
 def set_your_preference():        
     person = select_option_from_menu('Choose a person', people)
@@ -323,7 +309,8 @@ def run():
                 input_round_owner = input("Enter round owner name: \n")
                 input_round_time = datetime.datetime.now
                 input_order_number = input("Enter order number: \n")
-                round = Round(input_round_owner, input_round_time,input_order_number) 
+                round = Round(input_round_owner, input_round_time,input_order_numbe
+                r) 
                 # while 
                 for name in preferences:
                     round.add_an_order(preferences, name)

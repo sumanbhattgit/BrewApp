@@ -8,24 +8,22 @@ def read_preference_database():
     rows = cursor.fetchall()
     p_dict = {}
     for row in rows:
-        ID = row[0]
 
         f_name = row[1]
-
-        l_name = row[2]
-
+        l_name = row[2] 
+        fullname = " ".join((f_name, l_name))   
         fav_drink = row[3]
-
-        
-        preference_d = {"ID": row[0],"F_Name": row[1], "L_Name": row[2], "Fav_Drink": row[3]}
-        p_dict.append(preference_d)
-
+        p_dict[fullname] = fav_drink 
+    
     return p_dict
+
     cursor.close()
     connection.close()
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     read_preference_database()
-    preference_dict = read_preference_database()
-    print(preference_dict)
+    # preference_dict = read_preference_database()
+    # print(preference_dict)
+
+
 
