@@ -1,12 +1,14 @@
 #Python Object-Oriented Programming
 
 # Method is a function associated with a class
-UPDATED ON 01/10/2020  01:00 AM
+# UPDATED ON 01/10/2020  01:00 AM
 
-from src.core.table import print_table, print_footer, print_footer2
+from src.core.table import print_table
+from constant import PREFERENCE_FILE_PATH
+from src.core.output import load_preferences, load_list_from_file
+import src.core.db2preference as c
 import datetime
 
-preferences = {"Suman":"Orange juice", "Chloe":"Tea" , "Hannah":"Coffee", "Katie":"Vodka", "Fatou":"Milk"}
 
 class Round: #Class is a blueprint for creating instances. Each person we create in my round class will be an istance of that class
     def __init__(self, owner_name, round_time, order_number):
@@ -22,61 +24,44 @@ class Round: #Class is a blueprint for creating instances. Each person we create
         items =[]
         for name, drink in self.orders.items():
             items.append(f'{name} ordered {drink}')
-        print_table(f"{self.name}'s round",items)
+        print_table(f"{self.name}'s Round" ,items)
         # print(f"{self.input_round_time}")
         # print(f"{self.input_order_number}")
 
-
-
 def round_menu():
-    print("Print1")
+    c.read_preference_database()
     input_round_owner = input("Enter round owner name: \n")
-    input_round_time = datetime.datetime.now
-    print(input_round_time)
+    input_round_time = datetime.datetime.now()
+    print(f'The time  now : {input_round_time}.')
     input_order_number = 5
-    round = Round(input_round_owner, input_round_time,input_order_number) 
+    round = Round(input_round_owner, input_round_time, input_order_number) 
     while True:
+        preferences = load_preferences()
         order_name = input("Enter a name: \n")
         if order_name not in preferences:
             userin = input("Enter your drink :\n")
             round.add_an_order(order_name, userin)
-         
-            userinputexit = input("Press enter to add more drinks or type exit to quit: \n")
-            if userinputexit.lower() in {"e", "exit"}:
-                print("checking 1 2 3")
-                round.print_order()      
-                exit()
-            else:
-                continue
-
-        if order_name in preferences:
-            print("Do you want your favourite drink? \n")
-            userinput = input("Enter yes or no \n")
+        else:
+            userinput = input("Do you want your favourite drink?\nEnter yes or no \n")
             if userinput.lower() in {"y","yes"}: 
                 round.add_an_order(order_name, preferences[order_name])
- 
-                print("it will prob print something")
-                round.print_order()  
-                exit()
-            else:
-                continuee
+
             if userinput.lower() in {"n","no"}: 
                 userin = input("Enter your drink :\n")
-                print("userin")
-                round.add_an_order(order_name, userin)
-  
-            userinputexit = input("Press enter to add more drinks or type exit to quit: \n")
-            if userinputexit.lower() in {"e", "exit"}:
-                print("checking 1 2 3")
-                round.print_order()  
-                exit()
-            else:
-                continue
+                round.add_an_order(order_name, preferences[order_name])
 
-    for name in preferences:
-        round.add_an_order(preferences, name)
-    round.print_order()
-round_menu()
+        userinputexit = input("Press enter to add more drinks or type exit to quit: \n")
+        if userinputexit == "":
+            continue
+        if userinputexit.lower() in {"e", "exit"}:
+            round.print_order()  
+            exit()
+        
+
+if __name__ == "__main__":
+    round_menu()
+
+
 
 # r1 = Round("Vovo","b","c")
 # r1.add_an_order({}, "Suman", "Water")

@@ -24,7 +24,7 @@ def read_people_database():
 
 
 # if __name__ == "__main__":
-    read_people_database()
+    # read_people_database()
 
     # p_list = read_people_database()
 
@@ -42,12 +42,10 @@ def uploading_people_to_the_database(First_Name, Last_Name, Age):
     connection.close()
 
 if __name__ == "__main__":
+    read_people_database()
     uploading_people_to_the_database()
 
     
     # p_list = uploading_people_to_the_database()
 
     # print(p_list)
-    
-    #cursor.execute("INSERT INTO Person (First_Name, Last_Name, Age, Reg_Date) VALUES (%s, %s, %s)", person)
-        # for person in data:

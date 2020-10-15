@@ -1,33 +1,31 @@
 import os
-
-APP_NAME ="BrIW" 
-VERSION  = "0.1"
+from src.core.inputs import get_menu_input
 
 Menu = f"""
-Welcome to {APP_NAME} v{VERSION}!
-Please, select an option by entering a number: 
-[1] Get all people 
-[2] Get all drinks 
-[3] Input People
-[4] Input Drinks
-[5] Set_Your_Preference
-[6] Preference_Printout
-[7] Round
-[8] Exit
+╭─────────┬──────────────────────────────┬─────────╮
+│         │      Welcome to BrewApp      │         │    
+│╭────────┴──────────────────────────────┴────────╮│                                           
+││Please, select an option by entering a number:  ││ 
+││[1] Get all people                              ││ 
+││[2] Get all drinks                              ││ 
+││[3] Input People                                ││              
+││[4] Input Drinks                                ││
+││[5] Set_Your_Preference                         ││  
+││[6] Preference_Printout                         ││  
+││[7] Round                                       ││  
+││[8] Exit                                        ││    
+│╰────────────┬──────────────────────┬────────────╯│
+│             │Give us 5 stars rating│             │
+╰─────────────┴──────────────────────┴─────────────╯
 """
 
-def clear_screen():
-    os.system("cls")
-
 def print_main_menu():
-    clear_screen()
     print(Menu)
 
 def print_menu(title, data):
     items = []
     for counter, item in enumerate(data, 1): #list number for preference 5
         items.append(f"[{counter}] {item}")
-    clear_screen()
     print(f"{title}\n")
     print('\n'.join(items), '\n')
 

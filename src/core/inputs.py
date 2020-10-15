@@ -1,3 +1,4 @@
+
 def get_menu_input(message):
     try:
         return int(input(f"{message} "))
@@ -10,7 +11,7 @@ def user_input(selection_message):
     return input(f"{selection_message} \n") # return function for the def to return the input
 
 def wait():
-    input("Press enter to continue \n")0
+    input("Press enter to continue \n")
 
 def input_people(input_message):
     return input(f"{selection_message} \n")
